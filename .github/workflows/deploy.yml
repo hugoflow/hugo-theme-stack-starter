@@ -43,14 +43,16 @@ jobs:
 
       # 部署到不同的仓库 hugoflow.github.io
       - name: Deploy to GitHub Pages repository
-        uses: peaceiris/actions-gh-pages@v4
+        uses: peaceiris/actions-gh-pages@v3  # 改为 v3 而不是 v4
         with:
-          PERSONAL_TOKEN: ${{ secrets.PAT }}  # 需要设置部署密钥
-          external_repository: hugoflow/hugoflow.github.io  # 目标仓库
-          publish_branch: main  # 目标仓库的分支
+          personal_token: ${{ secrets.PAT }}  # 注意：v3 使用 personal_token 而不是 PERSONAL_TOKEN
+          external_repository: hugoflow/hugoflow.github.io
+          publish_branch: main
           publish_dir: ./public
           commit_message: ${{ github.event.head_commit.message }}
+          full_commit_message: ${{ github.event.head_commit.message }}
           # 如果目标仓库是私有的，可能需要以下选项
           # user_name: 'github-actions[bot]'
           # user_email: 'github-actions[bot]@users.noreply.github.com'
+
 
